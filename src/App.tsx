@@ -31,15 +31,15 @@ const  App = () => {
     
     if (minValue > +e.target.value) {
       setTitle('the starting point cant be bigger')
-      setClass('h1')
+      setClass('counter_bigger')
     } 
     if (minValue === +e.target.value ){
       setTitle('The values cannot be equa')
-      setClass('h2')
+      setClass('count_equa')
     }
     if (+e.target.value > minValue) {
       setTitle('Save siting')
-      setClass('h3')
+      setClass('count_save')
     }
     if (+e.target.value >= 0){
       setMaxValue(+e.target.value);
@@ -50,15 +50,15 @@ const  App = () => {
     
     if (+e.target.value > maxValue) {
       setTitle('the starting point cant be bigger')
-      setClass('h1')
+      setClass('counter_bigger')
     } 
     if (+e.target.value === maxValue ){
       setTitle('The values cannot be equal')
-      setClass('h2')
+      setClass('count_equa')
     }
     if (maxValue > +e.target.value) {
       setTitle('Save siting')
-      setClass('h3')
+      setClass('count_save')
     }
     if (+e.target.value >= 0){
       setMinValue(+e.target.value);
@@ -78,25 +78,28 @@ const  App = () => {
 
   return (
     <div className="App">
-      <CountPage
-      classs={classs}
-      maxValue={maxValue}
-      maxCount={maxCount}
-      minCount={minCount}
-      minValue={minValue}
-      count={count}
-      title={title}
-      incCount={incCount}
-      decCount={decCount}
-      resCount={resCount}/>
+      
       
       <SititngCount
-      setMaxCountCallBack={setMaxCountCallBack}
-      maxValue={maxValue}
-      minValue={minValue}
-      setMinCountCallBack={setMinCountCallBack}
-      saveValueCount={saveValueCount}/>
+        setMaxCountCallBack={setMaxCountCallBack}
+        maxValue={maxValue}
+        minValue={minValue}
+        setMinCountCallBack={setMinCountCallBack}
+        saveValueCount={saveValueCount}/>
+
+    <CountPage
+          classs={classs}
+          maxValue={maxValue}
+          maxCount={maxCount}
+          minCount={minCount}
+          minValue={minValue}
+          count={count}
+          title={title}
+          incCount={incCount}
+          decCount={decCount}
+          resCount={resCount}/>
     </div>
+    
   );
 }
 

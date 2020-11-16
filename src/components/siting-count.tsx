@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-
+import './siting-count.css';
 type SitingType = {
     setMaxCountCallBack: (e:ChangeEvent<HTMLInputElement>) => void
     maxValue: number
@@ -9,13 +9,13 @@ type SitingType = {
 }
 
 const SititngCount = ({
-    setMaxCountCallBack,
+    setMaxCountCallBack, 
     maxValue, 
     minValue, 
     setMinCountCallBack, 
     saveValueCount}:SitingType) => {
     return (
-        <div>
+        <div className='counter_siting'>
          <input 
           type='number' 
           value={maxValue}
@@ -26,7 +26,7 @@ const SititngCount = ({
           onChange={setMinCountCallBack}
         />
        
-        <button onClick={saveValueCount } disabled={maxValue <= minValue}> Save</button>
+        <button className='buttons' onClick={saveValueCount } disabled={maxValue <= minValue}> Save</button>
       </div>
     )
 }

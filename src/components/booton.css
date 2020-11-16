@@ -1,0 +1,34 @@
+.buttons {
+    border-radius: 4px;
+    
+    color: #fff;    
+    width:60px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 8px 16px;    
+    text-decoration: none;
+    
+    transition: background-color 0.1s linear;
+    border: none;
+    margin-right: 5px;
+}
+
+.buttons {
+    background-color: rgb( 43, 153, 91 );
+    
+}
+
+.buttons:hover, .buttons:focus
+ {
+    background-color: rgb( 75, 183, 141 );
+    outline: none;
+}
+.buttons:active
+{
+    
+}
+.buttons:disabled {
+    background-color: rgb(197, 235, 213);
+    
+} 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Bootons  from './booton';
+import './count-page.css';
 type CountPageTipes = {
     classs: string
     maxValue: number
@@ -31,11 +32,9 @@ const CountPage = (props:CountPageTipes) => {
     
     if (maxValue === maxCount && minCount === minValue) {
         return (
-            <div>
+            <div className={'counter_body'}>
                 <div className={`norm`}>
-                {
-                   count            
-                }
+                    <span className={count === maxCount ? 'text_red' : 'text_count'}>{count}</span>
                 
                 </div>
             <Bootons 
@@ -57,10 +56,11 @@ const CountPage = (props:CountPageTipes) => {
     } else  {
         return (
            
-            <div className={`${classs}`}>
-            {
-                title            
-            }
+            <div className={`${classs} counter_body`}>
+                <div className={`norm`}>
+                    <span className='text_error'>{title}</span>
+                </div>
+                
             
             </div>
         )

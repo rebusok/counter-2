@@ -1,4 +1,5 @@
 import React from 'react';
+import './booton.css';
 
 type ButtonTipes = {
     callBackBtn: () => void 
@@ -10,7 +11,7 @@ type ButtonTipes = {
 const Bootons = (props:ButtonTipes) => {
     const {callBackBtn, disabled, title} = props;
     return (
-    <button onClick={callBackBtn} disabled={disabled}> {title}</button>
+    <button className='buttons' onClick={callBackBtn} disabled={disabled}> {title}</button>
     )
 
 

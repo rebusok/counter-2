@@ -1,7 +1,14 @@
 .App {
+  display: flex;
   text-align: center;
+  justify-content: center;
+  align-items:center;
+  height: 80vh;
+  padding: 15px;
 }
-
+*{
+  box-sizing: border-box;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
