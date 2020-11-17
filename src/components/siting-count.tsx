@@ -22,7 +22,7 @@ const SitingCount = ({
     errorValue
     }:SitingType) => {
     const inputClass = errorValue ? s.error_value : s.input_norm;
-    let long = true
+
     return (
         <div className={s.counter_siting}>
          <div className={s.input_wrapper}>
