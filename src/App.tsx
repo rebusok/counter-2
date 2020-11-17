@@ -2,17 +2,19 @@ import React, { useState, ChangeEvent } from 'react';
 import CountPage from './components/count-page';
 import './App.css';
 import SitingCount from './components/siting-count';
-const  App = () => {  
-  
-  const [maxValue, setMaxValue] = useState<number>(7);
-  const [minValue, setMinValue] = useState<number>(0);
+const  App = () => {
+  const initNum = 7;
+  const [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('maxValue')));
+  const [minValue, setMinValue] = useState<number>(Number(localStorage.getItem('minValue')));
   const [count, setCount] = useState<number>(minValue);
   const [disableSaveBtn, setDisableSaveBtn] = useState<boolean>(true)
   const [disableIncBtn, setDisableIncBtn] = useState<boolean>(false);
   const [disableDecBtn, setDisableDecBtn] = useState<boolean>(true);
   const [disableResBtn, setDisableResBtn] = useState<boolean>(true);
   const [valueSiting, setValueSiting] = useState<boolean>(false)
-
+  if (Number(localStorage.getItem('maxValue')) === 0){
+    localStorage.setItem('maxValue', initNum.toString())
+  }
 
   const errorValue = maxValue <= minValue;
   const saveDisable = errorValue || disableSaveBtn;
@@ -54,7 +56,6 @@ const  App = () => {
     setDisableResBtn(true);
     setValueSiting(true);
 
-    
   }
   const setMinValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
     if (+e.currentTarget.value >= 0){
@@ -73,7 +74,8 @@ const  App = () => {
     setDisableIncBtn(false);
     setDisableIncBtn(false);
     setValueSiting(false);
-    
+    localStorage.setItem('minValue', minValue.toString())
+    localStorage.setItem('maxValue', maxValue.toString())
   }
   
 

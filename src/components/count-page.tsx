@@ -1,6 +1,8 @@
 import React from 'react';
-import Bootons  from './booton';
+import Button  from './Button';
 import s from './count-page.module.css';
+import icon from './simpsons_PNG65.png'
+import icon2 from './pngegg.png';
 type CountPageTypes = {
     maxValue: number
     minValue: number
@@ -38,23 +40,31 @@ const CountPage = (props:CountPageTypes) => {
              maxValue ? s.count_equa : ''}`}>
 
                 {
-                    errorValue ? <span> Incorret value!</span> : valueSiting ? <span>Save siting</span> :count
+                    errorValue ? <div className={s.img_icon}>
+                        <span> Incorret value!</span>
+                        <img src={icon} alt={'errr'}/>
+                    </div> : valueSiting ? <div className={s.img_icon2}>
+                        <span> Save siting!</span>
+                        <img src={icon2} alt={'errr'}/>
+                    </div> :count
                 }
 
 
             </div>
-        <Bootons
-        callBackBtn={incCount}
-        disabled={disableIncBtn}
-        title={'INC'}/>
-        <Bootons
-        callBackBtn={decCount}
-        disabled={disableDecBtn}
-        title={'DEC'}/>
-        <Bootons
-        callBackBtn={resCount}
-        disabled={disableResBtn}
-        title={'RES'}/>
+        <div className={s.button_wrapper}>
+            <Button
+                callBackBtn={incCount}
+                disabled={disableIncBtn}
+                title={'INC'}/>
+            <Button
+                callBackBtn={decCount}
+                disabled={disableDecBtn}
+                title={'DEC'}/>
+            <Button
+                callBackBtn={resCount}
+                disabled={disableResBtn}
+                title={'RES'}/>
+        </div>
 
 
     </div>

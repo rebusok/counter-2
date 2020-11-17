@@ -1,11 +1,14 @@
 .counter_body {
     border: 1px solid black;
     border-radius: 4px;
-    width: 250px;
-    height: 150px;
-    padding: 10px;
+    width: 350px;
+    height: 250px;
+    padding: 23px 0;
+    padding-bottom: 0;
+    box-shadow: inset 1px 1px 3px rgba(26, 26, 26, 0.5), 1px 1px 3px rgb(5, 5, 5)
 }
 .norm {
+    position: relative;
     border: 1px solid black;
     border-radius: 4px;
     width: 90%;
@@ -15,21 +18,51 @@
     justify-content: center;
     align-items:center;
     margin-bottom: 10px;
-    
+    box-shadow: inset 1px 1px 3px rgba(26, 26, 26, 0.5), 1px 1px 3px rgb(5, 5, 5)
 }
 .text_count{
-    font-size: 50px;
+    font-size: 70px;
 }
 .text_red {
-    font-size: 23px;
+    font-size: 34px;
     color:red
 }
 
 .count_equa {
     color:red;
-    font-size: 50px;
+    font-size: 70px;
+    z-index: 100;
 }
 .text_save {
     color:green;
-    font-size: 23px;
+    font-size: 34px;
+}
+.button_wrapper {
+    margin-top: 20px;
+}
+.img_icon img {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    right:  0;
+    z-index: 1;
+}
+.img_icon span {
+    position: absolute;
+    top: 38px;
+    left: 42px;
+    z-index: 400;
+}
+.img_icon2 img {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    right:  -20px;
+    z-index: 1;
+}
+.img_icon2 span {
+    position: absolute;
+    top: 58px;
+    left: 42px;
+    z-index: 400;
 }

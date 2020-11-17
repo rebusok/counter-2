@@ -1,28 +1,31 @@
 .counter_siting {
   border: 1px solid black;
   border-radius: 4px;
-  width: 250px;
-  height: 150px;
+  width: 350px;
+  height: 250px;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-right: 15px;
+  box-shadow: inset 1px 1px 3px rgba(26, 26, 26, 0.5), 1px 1px 3px rgb(5, 5, 5)
 }
 
 .counter_siting input {
   margin-top: 10px;
 }
-.counter_siting button {
-  margin-bottom: -3px;
-}
+
 .error_value {
   border: 1px solid red;
   color: red;
-  font-size: 16px;
+  width: 60%;
+  font-size: 20px;
+  font-weight: bold;
   border-radius: 8px;
   padding: 5px 15px;
+  background-color: transparent;
+  box-shadow: inset 2px 2px 3px rgba(219, 26, 26, 0.5), 1px 1px 3px rgb(245, 9, 9)
 }
 .error_value:focus,
 .error_value:active{
@@ -32,13 +35,29 @@
 }
 .input_norm {
   border: 1px solid black;
+  width: 60%;
   color: black;
-  font-size: 16px;
+  font-size: 20px;
+
   border-radius: 8px;
   padding: 5px 15px;
+  background-color: transparent;
+  box-shadow: inset 1px 1px 3px rgba(26, 26, 26, 0.5), 1px 1px 3px rgb(5, 5, 5)
 }
 .input_norm:focus,
 .input_norm:active{
   border: 1px solid black;
   outline: none;
+
+}
+.input_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+
+}
+.input_wrapper span {
+  margin-right: 10px;
+  font-size: 21px;
 }
