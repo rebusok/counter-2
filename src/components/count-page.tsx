@@ -1,70 +1,65 @@
 import React from 'react';
 import Bootons  from './booton';
-import './count-page.css';
-type CountPageTipes = {
-    classs: string
+import s from './count-page.module.css';
+type CountPageTypes = {
     maxValue: number
-    maxCount: number
-    minCount: number
     minValue: number
     count: number
-    title: string
+    disableIncBtn:boolean
+    disableDecBtn:boolean
+    disableResBtn:boolean
+    valueSiting: boolean
+    errorValue: boolean
     incCount: () => void
     decCount: () => void
     resCount: () => void
 }
 
-const CountPage = (props:CountPageTipes) => {
+const CountPage = (props:CountPageTypes) => {
 
     const {
-        classs,
-        maxValue,
-        maxCount,
-        minCount, 
-        minValue, 
+        errorValue,
+        valueSiting,
+        disableIncBtn,
+        disableDecBtn,
+        disableResBtn,
         count,
-        title,
         incCount,
         decCount,
-        resCount
+        resCount,
+        maxValue
     } = props;
 
     
-    if (maxValue === maxCount && minCount === minValue) {
-        return (
-            <div className={'counter_body'}>
-                <div className={`norm`}>
-                    <span className={count === maxCount ? 'text_red' : 'text_count'}>{count}</span>
-                
-                </div>
-            <Bootons 
-            callBackBtn={incCount}
-            disabled={count >= maxCount}
-            title={'INC'}/>
-            <Bootons 
-            callBackBtn={decCount}
-            disabled={count === minCount}
-            title={'DEC'}/>
-            <Bootons 
-            callBackBtn={resCount}
-            disabled={count <= minCount}
-            title={'RES'}/>
-            
-            
-        </div>
-        )
-    } else  {
-        return (
-           
-            <div className={`${classs} counter_body`}>
-                <div className={`norm`}>
-                    <span className='text_error'>{title}</span>
-                </div>
-                
-            
+
+    return (
+        <div className={s.counter_body}>
+            <div className={`${s.norm} ${s.text_count} ${errorValue ? s.text_red : valueSiting ? s.text_save : count ===
+             maxValue ? s.count_equa : ''}`}>
+
+                {
+                    errorValue ? <span> Incorret value!</span> : valueSiting ? <span>Save siting</span> :count
+                }
+
+
             </div>
-        )
-    }
+        <Bootons
+        callBackBtn={incCount}
+        disabled={disableIncBtn}
+        title={'INC'}/>
+        <Bootons
+        callBackBtn={decCount}
+        disabled={disableDecBtn}
+        title={'DEC'}/>
+        <Bootons
+        callBackBtn={resCount}
+        disabled={disableResBtn}
+        title={'RES'}/>
+
+
+    </div>
+    )
+
 
 
     

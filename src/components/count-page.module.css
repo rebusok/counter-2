@@ -21,15 +21,15 @@
     font-size: 50px;
 }
 .text_red {
-    font-size: 50px;
+    font-size: 23px;
     color:red
 }
-.text_error{
-    font-size: 20px;
-}
+
 .count_equa {
-    color:deeppink
+    color:red;
+    font-size: 50px;
 }
-.count_save {
-    color:green
+.text_save {
+    color:green;
+    font-size: 23px;
 }

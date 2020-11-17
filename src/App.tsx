@@ -1,77 +1,78 @@
 import React, { useState, ChangeEvent } from 'react';
 import CountPage from './components/count-page';
 import './App.css';
-import SititngCount from './components/siting-count';
+import SitingCount from './components/siting-count';
 const  App = () => {  
   
   const [maxValue, setMaxValue] = useState<number>(7);
   const [minValue, setMinValue] = useState<number>(0);
-  const [maxCount, setMaxCount] = useState<number>(maxValue);
-  const [minCount, setMinCount] = useState<number>(minValue);
-  const [count, setCount] = useState<number>(minCount);
-  const [title, setTitle] = useState<string>('');
-  const [classs, setClass] = useState<string>('')
+  const [count, setCount] = useState<number>(minValue);
+  const [disableSaveBtn, setDisableSaveBtn] = useState<boolean>(true)
+  const [disableIncBtn, setDisableIncBtn] = useState<boolean>(false);
+  const [disableDecBtn, setDisableDecBtn] = useState<boolean>(true);
+  const [disableResBtn, setDisableResBtn] = useState<boolean>(true);
+  const [valueSiting, setValueSiting] = useState<boolean>(false)
+
+
+  const errorValue = maxValue <= minValue;
+  const saveDisable = errorValue || disableSaveBtn;
   const incCount = () => {
-    setCount(count + 1);
+    if (count < maxValue){
+      setCount(count + 1)
+      setDisableDecBtn(false);
+      setDisableResBtn(false);
+    }
+
   }
 
+
+
   const decCount = () => {
-    if(count !== minCount){
+    if(count !== minValue){
       setCount(count - 1);
+      setDisableIncBtn(false);
     } else {
-      setCount(minCount);
+      setCount(minValue);
+      setDisableDecBtn(true);
     }
-    
+
   }
 
   const resCount  = () => {
-    setCount(minCount);
+    setCount(minValue);
+    setDisableIncBtn(false);
+    setDisableDecBtn(true);
+    setDisableResBtn(true);
   }
-  const setMaxCountCallBack = (e:ChangeEvent<HTMLInputElement>) => {
-    
-    if (minValue > +e.target.value) {
-      setTitle('the starting point cant be bigger')
-      setClass('counter_bigger')
-    } 
-    if (minValue === +e.target.value ){
-      setTitle('The values cannot be equa')
-      setClass('count_equa')
+  const setMaxValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
+    if (+e.currentTarget.value >= 0){
+      setMaxValue(+e.currentTarget.value);
     }
-    if (+e.target.value > minValue) {
-      setTitle('Save siting')
-      setClass('count_save')
-    }
-    if (+e.target.value >= 0){
-      setMaxValue(+e.target.value);
-    }
+    setDisableSaveBtn(false);
+    setDisableIncBtn(true);
+    setDisableDecBtn(true);
+    setDisableResBtn(true);
+    setValueSiting(true);
+
     
   }
-  const setMinCountCallBack = (e:ChangeEvent<HTMLInputElement>) => {
-    
-    if (+e.target.value > maxValue) {
-      setTitle('the starting point cant be bigger')
-      setClass('counter_bigger')
-    } 
-    if (+e.target.value === maxValue ){
-      setTitle('The values cannot be equal')
-      setClass('count_equa')
+  const setMinValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
+    if (+e.currentTarget.value >= 0){
+      setMinValue(+e.currentTarget.value);
     }
-    if (maxValue > +e.target.value) {
-      setTitle('Save siting')
-      setClass('count_save')
-    }
-    if (+e.target.value >= 0){
-      setMinValue(+e.target.value);
-    }  
+    setDisableSaveBtn(false);
+    setDisableIncBtn(true);
+    setDisableDecBtn(true);
+    setDisableResBtn(true);
+    setValueSiting(true);
+
   }
-  const saveValueCount = () => {    
-    setMaxCount(maxValue);
-    setMinCount(minValue);
-    if (maxValue > minValue) {
-      setCount(minValue);  
-      setClass('');
-    } 
-      
+  const saveValueCount = () => {
+    setCount(minValue);
+    setDisableSaveBtn(true);
+    setDisableIncBtn(false);
+    setDisableIncBtn(false);
+    setValueSiting(false);
     
   }
   
@@ -80,24 +81,27 @@ const  App = () => {
     <div className="App">
       
       
-      <SititngCount
-        setMaxCountCallBack={setMaxCountCallBack}
+      <SitingCount  setMaxCountCallBack={setMaxValueCallBack}
         maxValue={maxValue}
         minValue={minValue}
-        setMinCountCallBack={setMinCountCallBack}
-        saveValueCount={saveValueCount}/>
+        setMinCountCallBack={setMinValueCallBack}
+        saveValueCount={saveValueCount}
+        saveDisable={saveDisable}
+        errorValue={errorValue}
+        />
 
     <CountPage
-          classs={classs}
           maxValue={maxValue}
-          maxCount={maxCount}
-          minCount={minCount}
           minValue={minValue}
           count={count}
-          title={title}
           incCount={incCount}
           decCount={decCount}
-          resCount={resCount}/>
+          resCount={resCount}
+          disableIncBtn={(count === maxValue) ? true : disableIncBtn}
+          disableDecBtn={(count === minValue) ? true : disableDecBtn}
+          disableResBtn={(count === minValue) ? true : disableResBtn}
+          valueSiting={valueSiting}
+          errorValue={errorValue}/>
     </div>
     
   );

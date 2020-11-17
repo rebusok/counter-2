@@ -1,0 +1,44 @@
+.counter_siting {
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 250px;
+  height: 150px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.counter_siting input {
+  margin-top: 10px;
+}
+.counter_siting button {
+  margin-bottom: -3px;
+}
+.error_value {
+  border: 1px solid red;
+  color: red;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 5px 15px;
+}
+.error_value:focus,
+.error_value:active{
+  border: 1px solid red;
+  outline: none;
+
+}
+.input_norm {
+  border: 1px solid black;
+  color: black;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 5px 15px;
+}
+.input_norm:focus,
+.input_norm:active{
+  border: 1px solid black;
+  outline: none;
+}

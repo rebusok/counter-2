@@ -1,34 +1,44 @@
 import React, {ChangeEvent} from 'react';
-import './siting-count.css';
+import s from './siting-count.module.css';
+import Bootons from "./booton";
 type SitingType = {
     setMaxCountCallBack: (e:ChangeEvent<HTMLInputElement>) => void
     maxValue: number
     minValue: number
     setMinCountCallBack:(e:ChangeEvent<HTMLInputElement>) => void
     saveValueCount: () => void
+    saveDisable: boolean
+    errorValue: boolean
+
 }
 
-const SititngCount = ({
+const SitingCount = ({
     setMaxCountCallBack, 
     maxValue, 
     minValue, 
-    setMinCountCallBack, 
-    saveValueCount}:SitingType) => {
+    setMinCountCallBack,
+    saveValueCount,
+    saveDisable,
+    errorValue
+    }:SitingType) => {
+    const inputClass = errorValue ? s.error_value : s.input_norm;
     return (
-        <div className='counter_siting'>
-         <input 
+        <div className={s.counter_siting}>
+         <input
+          className={inputClass}
           type='number' 
           value={maxValue}
           onChange={setMaxCountCallBack}/>
-        <input 
+        <input
+          className={inputClass}
           type='number'
           value={minValue}
           onChange={setMinCountCallBack}
         />
        
-        <button className='buttons' onClick={saveValueCount } disabled={maxValue <= minValue}> Save</button>
+        <Bootons callBackBtn={saveValueCount} disabled={saveDisable} title={'Save'}/>
       </div>
     )
 }
 
-export default SititngCount;
+export default SitingCount;
