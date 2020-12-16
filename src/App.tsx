@@ -2,8 +2,11 @@ import React, { useState, ChangeEvent } from 'react';
 import CountPage from './components/count-page';
 import './App.css';
 import SitingCount from './components/siting-count';
+import {useSelector} from "react-redux";
+import {IGlobalState} from "./redux/store";
 const  App = () => {
-  const initNum = 7;
+  const {initNum} = useSelector((state:IGlobalState) => state.counter)
+  // const initNum = 7;
   const [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('maxValue')));
   const [minValue, setMinValue] = useState<number>(Number(localStorage.getItem('minValue')));
   const [count, setCount] = useState<number>(minValue);
@@ -16,6 +19,7 @@ const  App = () => {
     localStorage.setItem('maxValue', initNum.toString())
   }
 
+  console.log(initNum)
   const errorValue = maxValue <= minValue;
   const saveDisable = errorValue || disableSaveBtn;
   const incCount = () => {
