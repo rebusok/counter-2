@@ -1,10 +1,11 @@
+import {ACTIONS_TYPE, CounterReducersTypes} from "./actions";
 
 const initialState = {
     value: {
         minValue: 0,
         maxValue: 7
     },
-    count: 0,
+    counter: 0,
     disableBtn: {
         disableSaveBtn: true,
         disableIncBtn: false,
@@ -27,15 +28,25 @@ type ValueType = {
 
 type CounterStateType = {
     value: ValueType
-    count: number
+    counter: number
     disableBtn: DisableBtnType
     valueSiting: boolean
     initNum: number
 }
 
 
-export const counterReducer = (state:CounterStateType = initialState, action:any):CounterStateType => {
+export const counterReducer = (state:CounterStateType = initialState, action:CounterReducersTypes):CounterStateType => {
     switch (action.type){
+        case ACTIONS_TYPE.CHANGE_COUNTER_INC:
+            return {
+                ...state,
+                counter: action.counter + 1
+            }
+        case ACTIONS_TYPE.CHANGE_COUNTER_DEC:
+            return {
+                ...state,
+                counter: action.counter - 1
+            }
         default:
             return state
     }

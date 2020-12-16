@@ -2,10 +2,11 @@ import React, { useState, ChangeEvent } from 'react';
 import CountPage from './components/count-page';
 import './App.css';
 import SitingCount from './components/siting-count';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {IGlobalState} from "./redux/store";
+import {ChangeCounterDECAC, ChangeCounterINCAC} from "./redux/actions";
 const  App = () => {
-  const {initNum} = useSelector((state:IGlobalState) => state.counter)
+  const {initNum, counter, value} = useSelector((state:IGlobalState) => state.counter)
   // const initNum = 7;
   const [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('maxValue')));
   const [minValue, setMinValue] = useState<number>(Number(localStorage.getItem('minValue')));
@@ -19,12 +20,14 @@ const  App = () => {
     localStorage.setItem('maxValue', initNum.toString())
   }
 
+  const dispatch = useDispatch();
   console.log(initNum)
   const errorValue = maxValue <= minValue;
   const saveDisable = errorValue || disableSaveBtn;
   const incCount = () => {
-    if (count < maxValue){
-      setCount(count + 1)
+    if (counter < maxValue){
+      dispatch(ChangeCounterINCAC(counter))
+
       setDisableDecBtn(false);
       setDisableResBtn(false);
     }
@@ -34,8 +37,8 @@ const  App = () => {
 
 
   const decCount = () => {
-    if(count !== minValue){
-      setCount(count - 1);
+    if(counter !== minValue){
+      dispatch(ChangeCounterDECAC(counter))
       setDisableIncBtn(false);
     } else {
       setCount(minValue);
@@ -99,13 +102,13 @@ const  App = () => {
     <CountPage
           maxValue={maxValue}
           minValue={minValue}
-          count={count}
+          count={counter}
           incCount={incCount}
           decCount={decCount}
           resCount={resCount}
-          disableIncBtn={(count === maxValue) ? true : disableIncBtn}
-          disableDecBtn={(count === minValue) ? true : disableDecBtn}
-          disableResBtn={(count === minValue) ? true : disableResBtn}
+          disableIncBtn={(counter === maxValue) ? true : disableIncBtn}
+          disableDecBtn={(counter === minValue) ? true : disableDecBtn}
+          disableResBtn={(counter === minValue) ? true : disableResBtn}
           valueSiting={valueSiting}
           errorValue={errorValue}/>
     </div>
