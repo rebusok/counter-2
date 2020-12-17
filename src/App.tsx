@@ -1,37 +1,45 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect} from 'react';
 import CountPage from './components/count-page';
 import './App.css';
 import SitingCount from './components/siting-count';
 import {useDispatch, useSelector} from "react-redux";
 import {IGlobalState} from "./redux/store";
-import {ChangeCounterDECAC, ChangeCounterINCAC} from "./redux/actions";
+import {
+  ChangeCounterAC,
+  ChangeCounterDECAC,
+  ChangeCounterINCAC, SetBtnDesAC, SetBtnIncAC, SetBtnResAC, SetBtnSaveAC, SetValueMaxAC, SetValueMinAC,
+
+  SetValueSitingAC
+} from "./redux/actions";
 const  App = () => {
-  const {initNum, counter, value} = useSelector((state:IGlobalState) => state.counter)
-  // const initNum = 7;
-  const [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('maxValue')));
-  const [minValue, setMinValue] = useState<number>(Number(localStorage.getItem('minValue')));
-  const [count, setCount] = useState<number>(minValue);
-  const [disableSaveBtn, setDisableSaveBtn] = useState<boolean>(true)
-  const [disableIncBtn, setDisableIncBtn] = useState<boolean>(false);
-  const [disableDecBtn, setDisableDecBtn] = useState<boolean>(true);
-  const [disableResBtn, setDisableResBtn] = useState<boolean>(true);
-  const [valueSiting, setValueSiting] = useState<boolean>(false)
-  if (Number(localStorage.getItem('maxValue')) === 0){
-    localStorage.setItem('maxValue', initNum.toString())
-  }
+  const {initNum, counter, value:{maxValue, minValue}, valueSiting, disableBtn} = useSelector((state:IGlobalState) => state.counter)
+
+
 
   const dispatch = useDispatch();
-  console.log(initNum)
+
+  useEffect(() => {
+    if (Number(localStorage.getItem('maxValue')) === 0){
+      localStorage.setItem('maxValue', initNum.toString())
+    }
+    dispatch(SetValueMaxAC(Number(localStorage.getItem('maxValue'))))
+    dispatch(ChangeCounterAC(minValue));
+  }, [dispatch, initNum, minValue ]);
+
+
   const errorValue = maxValue <= minValue;
-  const saveDisable = errorValue || disableSaveBtn;
+  const saveDisable = errorValue || disableBtn.disableSaveBtn;
+
+
+
+
   const incCount = () => {
     if (counter < maxValue){
       dispatch(ChangeCounterINCAC(counter))
+      dispatch(SetBtnDesAC(false))
+      dispatch(SetBtnResAC(false))
 
-      setDisableDecBtn(false);
-      setDisableResBtn(false);
     }
-
   }
 
 
@@ -39,48 +47,49 @@ const  App = () => {
   const decCount = () => {
     if(counter !== minValue){
       dispatch(ChangeCounterDECAC(counter))
-      setDisableIncBtn(false);
+      dispatch(SetBtnIncAC(false));
     } else {
-      setCount(minValue);
-      setDisableDecBtn(true);
+      dispatch(ChangeCounterAC(minValue));
+      dispatch(SetBtnDesAC(true))
     }
 
   }
 
   const resCount  = () => {
-    setCount(minValue);
-    setDisableIncBtn(false);
-    setDisableDecBtn(true);
-    setDisableResBtn(true);
+    dispatch(ChangeCounterAC(minValue));
+    dispatch(SetBtnIncAC(false));
+    dispatch(SetBtnDesAC(true))
+    dispatch(SetBtnResAC(false))
+
+
   }
   const setMaxValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
     if (+e.currentTarget.value >= 0){
-      setMaxValue(+e.currentTarget.value);
+      dispatch(SetValueMaxAC(+e.currentTarget.value));
     }
-    setDisableSaveBtn(false);
-    setDisableIncBtn(true);
-    setDisableDecBtn(true);
-    setDisableResBtn(true);
-    setValueSiting(true);
+    dispatch(SetBtnSaveAC(false))
+    dispatch(SetBtnIncAC(true));
+    dispatch(SetBtnDesAC(true))
+    dispatch(SetBtnResAC(true))
+    dispatch(SetValueSitingAC(true));
 
   }
   const setMinValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
     if (+e.currentTarget.value >= 0){
-      setMinValue(+e.currentTarget.value);
+      dispatch(SetValueMinAC(+e.currentTarget.value));
     }
-    setDisableSaveBtn(false);
-    setDisableIncBtn(true);
-    setDisableDecBtn(true);
-    setDisableResBtn(true);
-    setValueSiting(true);
+    dispatch(SetBtnSaveAC(false))
+    dispatch(SetBtnIncAC(true));
+    dispatch(SetBtnDesAC(true))
+    dispatch(SetBtnResAC(true))
+    dispatch(SetValueSitingAC(true));
 
   }
   const saveValueCount = () => {
-    setCount(minValue);
-    setDisableSaveBtn(true);
-    setDisableIncBtn(false);
-    setDisableIncBtn(false);
-    setValueSiting(false);
+    dispatch(ChangeCounterAC(minValue));
+    dispatch(SetBtnSaveAC(true))
+    dispatch(SetBtnIncAC(false));
+    dispatch(SetValueSitingAC(false));
     localStorage.setItem('minValue', minValue.toString())
     localStorage.setItem('maxValue', maxValue.toString())
   }
@@ -88,7 +97,6 @@ const  App = () => {
 
   return (
     <div className="App">
-      
       
       <SitingCount  setMaxCountCallBack={setMaxValueCallBack}
         maxValue={maxValue}
@@ -106,9 +114,9 @@ const  App = () => {
           incCount={incCount}
           decCount={decCount}
           resCount={resCount}
-          disableIncBtn={(counter === maxValue) ? true : disableIncBtn}
-          disableDecBtn={(counter === minValue) ? true : disableDecBtn}
-          disableResBtn={(counter === minValue) ? true : disableResBtn}
+          disableIncBtn={(counter === maxValue) ? true : disableBtn.disableIncBtn}
+          disableDecBtn={(counter === minValue) ? true : disableBtn.disableDecBtn}
+          disableResBtn={(counter === minValue) ? true : disableBtn.disableResBtn}
           valueSiting={valueSiting}
           errorValue={errorValue}/>
     </div>

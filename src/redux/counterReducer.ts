@@ -2,8 +2,8 @@ import {ACTIONS_TYPE, CounterReducersTypes} from "./actions";
 
 const initialState = {
     value: {
-        minValue: 0,
-        maxValue: 7
+        minValue: Number(localStorage.getItem('minValue')) || 0,
+        maxValue: Number(localStorage.getItem('minValue')) || 7
     },
     counter: 0,
     disableBtn: {
@@ -37,15 +37,47 @@ type CounterStateType = {
 
 export const counterReducer = (state:CounterStateType = initialState, action:CounterReducersTypes):CounterStateType => {
     switch (action.type){
-        case ACTIONS_TYPE.CHANGE_COUNTER_INC:
+        case ACTIONS_TYPE.CHANGE_COUNTER:
             return {
                 ...state,
-                counter: action.counter + 1
+                ...action.payload
             }
-        case ACTIONS_TYPE.CHANGE_COUNTER_DEC:
+        case ACTIONS_TYPE.CHANGE_SITING:
             return {
                 ...state,
-                counter: action.counter - 1
+                ...action.payload
+            }
+        case ACTIONS_TYPE.CHANGE_BTN_DEC_DIS:
+            console.log(action.payload)
+            console.log(state)
+            return {
+                ...state,
+                disableBtn:{...state.disableBtn, ...action.payload}
+            }
+        case ACTIONS_TYPE.CHANGE_BTN_RES_DIS:
+            return {
+                ...state,
+                disableBtn:{...state.disableBtn, ...action.payload}
+            }
+        case ACTIONS_TYPE.CHANGE_BTN_SAVE_DIS:
+            return {
+                ...state,
+                disableBtn:{...state.disableBtn, ...action.payload}
+            }
+        case ACTIONS_TYPE.CHANGE_BTN_INC_DIS:
+            return {
+                ...state,
+                disableBtn:{...state.disableBtn, ...action.payload}
+            }
+        case ACTIONS_TYPE.CHANGE_VALUE_MIN:
+            return {
+                ...state,
+                value:{...state.value, ...action.payload}
+            }
+        case ACTIONS_TYPE.CHANGE_VALUE_MAX:
+            return {
+                ...state,
+                value:{...state.value, ...action.payload}
             }
         default:
             return state
