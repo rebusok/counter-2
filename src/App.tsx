@@ -25,6 +25,7 @@ const  App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     if (Number(localStorage.getItem('maxValue')) === 0){
       dispatch(SetValueSitingAC(true));
       dispatch(SetBtnIncAC(true));
@@ -32,6 +33,7 @@ const  App = () => {
     } else {
       dispatch(SetBtnSaveAC(true))
     }
+    dispatch(ChangeCounterAC(minValue));
   }, []);
 
 
@@ -83,9 +85,11 @@ const  App = () => {
 
   }
   const setMinValueCallBack = (e:ChangeEvent<HTMLInputElement>) => {
+
     if (+e.currentTarget.value >= 0){
       dispatch(SetValueMinAC(+e.currentTarget.value));
     }
+
     dispatch(SetBtnSaveAC(false))
     dispatch(SetBtnIncAC(true));
     dispatch(SetBtnDesAC(true))
