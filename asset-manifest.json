@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/homework/static/css/main.54939d2a.chunk.css",
+    "main.js": "/homework/static/js/main.dfd9797e.chunk.js",
+    "main.js.map": "/homework/static/js/main.dfd9797e.chunk.js.map",
+    "runtime-main.js": "/homework/static/js/runtime-main.f150cad3.js",
+    "runtime-main.js.map": "/homework/static/js/runtime-main.f150cad3.js.map",
+    "static/js/2.78ec1b39.chunk.js": "/homework/static/js/2.78ec1b39.chunk.js",
+    "static/js/2.78ec1b39.chunk.js.map": "/homework/static/js/2.78ec1b39.chunk.js.map",
+    "index.html": "/homework/index.html",
+    "static/css/main.54939d2a.chunk.css.map": "/homework/static/css/main.54939d2a.chunk.css.map",
+    "static/js/2.78ec1b39.chunk.js.LICENSE.txt": "/homework/static/js/2.78ec1b39.chunk.js.LICENSE.txt",
+    "static/media/pngegg.6bf44fab.png": "/homework/static/media/pngegg.6bf44fab.png",
+    "static/media/simpsons_PNG65.b3f03e2b.png": "/homework/static/media/simpsons_PNG65.b3f03e2b.png",
+    "static/media/App.css": "/homework/static/media/triangles-download.72ba2d99.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f150cad3.js",
+    "static/js/2.78ec1b39.chunk.js",
+    "static/css/main.54939d2a.chunk.css",
+    "static/js/main.dfd9797e.chunk.js"
+  ]
+}
