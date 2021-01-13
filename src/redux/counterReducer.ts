@@ -3,7 +3,7 @@ import {ACTIONS_TYPE, CounterReducersTypes} from "./actions";
 const initialState = {
     value: {
         minValue: Number(localStorage.getItem('minValue')) || 0,
-        maxValue: Number(localStorage.getItem('minValue')) || 7
+        maxValue: Number(localStorage.getItem('maxValue')) || 7
     },
     counter: 0,
     disableBtn: {
@@ -12,8 +12,8 @@ const initialState = {
         disableDecBtn: true,
         disableResBtn: true
     },
-    valueSiting: false,
-    initNum: 7
+    valueSiting: false
+
 }
 type DisableBtnType = {
     disableSaveBtn: boolean
@@ -31,7 +31,6 @@ type CounterStateType = {
     counter: number
     disableBtn: DisableBtnType
     valueSiting: boolean
-    initNum: number
 }
 
 

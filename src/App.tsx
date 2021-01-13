@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import CountPage from './components/count-page';
 import './App.css';
 import SitingCount from './components/siting-count';
@@ -7,12 +7,18 @@ import {IGlobalState} from "./redux/store";
 import {
   ChangeCounterAC,
   ChangeCounterDECAC,
-  ChangeCounterINCAC, SetBtnDesAC, SetBtnIncAC, SetBtnResAC, SetBtnSaveAC, SetValueMaxAC, SetValueMinAC,
-
+  ChangeCounterINCAC,
+  SetBtnDesAC,
+  SetBtnIncAC,
+  SetBtnResAC,
+  SetBtnSaveAC,
+  SetValueMaxAC,
+  SetValueMinAC,
   SetValueSitingAC
 } from "./redux/actions";
+
 const  App = () => {
-  const {initNum, counter, value:{maxValue, minValue}, valueSiting, disableBtn} = useSelector((state:IGlobalState) => state.counter)
+  const { counter, value:{maxValue, minValue}, valueSiting, disableBtn} = useSelector((state:IGlobalState) => state.counter)
 
 
 
@@ -20,11 +26,13 @@ const  App = () => {
 
   useEffect(() => {
     if (Number(localStorage.getItem('maxValue')) === 0){
-      localStorage.setItem('maxValue', initNum.toString())
+      dispatch(SetValueSitingAC(true));
+      dispatch(SetBtnIncAC(true));
+      dispatch(SetBtnSaveAC(false))
+    } else {
+      dispatch(SetBtnSaveAC(true))
     }
-    dispatch(SetValueMaxAC(Number(localStorage.getItem('maxValue'))))
-    dispatch(ChangeCounterAC(minValue));
-  }, [dispatch, initNum, minValue ]);
+  }, []);
 
 
   const errorValue = maxValue <= minValue;
